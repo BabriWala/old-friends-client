@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import Logo from "../../../Assets/logo.png";
+import {Link} from 'react-router-dom';
 export default function Header() {
   const [show, setShow] = useState(null);
   const [profile, setProfile] = useState(false);
   return (
     <>
-      <div className="bg-gray-200 h-full w-full">
+      <div className="bg-gray-200 mb-20 h-full w-full">
         {/* Code block starts */}
         <nav className="w-full bg-white hidden xl:block shadow">
           <div className="container px-6 h-16 flex justify-between items-center lg:items-stretch mx-auto">
@@ -17,37 +18,37 @@ export default function Header() {
                 </h3>
               </div>
               <ul className="hidden xl:flex items-center h-full">
-                <li className="cursor-pointer h-full flex items-center text-sm text-indigo-700 tracking-normal transition duration-150 ease-in-out">
+                <Link to={'/home'} className="cursor-pointer h-full flex items-center text-sm text-indigo-700 tracking-normal transition duration-150 ease-in-out">
                   Home
-                </li>
-                <li className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mx-10 tracking-normal transition duration-150 ease-in-out">
+                </Link>
+                <Link to={'/blog'} className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mx-10 tracking-normal transition duration-150 ease-in-out">
                   Blog
-                </li>
-                <li className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
+                </Link>
+                <Link to={'/dashboard'} className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
                   Dashboard
-                </li>
-                <li className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
+                </Link>
+                <Link to={'/allBuyers'} className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
                   All Buyers
-                </li>
-                <li className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
+                </Link>
+                <Link to={'/allSellers'} className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
                   All Sellers
-                </li>
-                <li className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
+                </Link>
+                <Link to={'/reportedItems'} className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
                   Reported Items
-                </li>
-                <li className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
+                </Link>
+                <Link to={'/addAProduct'} className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
                   Add a Product
-                </li>
-                <li className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
+                </Link>
+                <Link to={'/myBuers'} className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
                   My Buyers
-                </li>
-                <li className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
+                </Link>
+                <Link to={'/myOrders'} className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
                   My Orders
-                </li>
+                </Link>
               </ul>
             </div>
             <div className="h-full hidden xl:flex items-center justify-end">
-              <div className="h-full flex">
+              {/* <div className="h-full flex">
                 <div
                   className="flex items-center pl-8 relative cursor-pointer"
                   onClick={() => setProfile(!profile)}
@@ -68,7 +69,10 @@ export default function Header() {
                   />
                   <p className="text-gray-800 text-sm ml-2">Jane Doe</p>
                 </div>
-              </div>
+              </div> */}
+              <Link to={'/login'} className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
+                  Login
+              </Link>
             </div>
             <div className="flex items-center xl:hidden">
               <ul className="p-2 border-r bg-white absolute rounded top-0 left-0 right-0 shadow mt-16 md:mt-16 hidden">
@@ -302,7 +306,7 @@ export default function Header() {
                       </div>
                     </div>
                     <ul className="f-m-m">
-                      <a href="/" className="cursor-pointer">
+                      <Link to={'/home'} className="cursor-pointer">
                         <li className="text-gray-800 pt-8">
                           <div className="flex items-center">
                             <p className="text-indigo-700 xl:text-base text-base ml-3">
@@ -310,8 +314,8 @@ export default function Header() {
                             </p>
                           </div>
                         </li>
-                      </a>
-                      <a href="/" className="cursor-pointer">
+                      </Link>
+                      <Link to={'/blog'} className="cursor-pointer">
                         <li className="text-gray-800 pt-8">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
@@ -321,8 +325,8 @@ export default function Header() {
                             </div>
                           </div>
                         </li>
-                      </a>
-                      <a href="/" className="cursor-pointer">
+                      </Link>
+                      <Link to={'/dashboard'} className="cursor-pointer">
                         <li className="text-gray-800 pt-8">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
@@ -332,8 +336,8 @@ export default function Header() {
                             </div>
                           </div>
                         </li>
-                      </a>
-                      <a href="/" className="cursor-pointer">
+                      </Link>
+                      <Link to={'/allBuyers'} className="cursor-pointer">
                         <li className="text-gray-800 pt-8">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
@@ -343,8 +347,8 @@ export default function Header() {
                             </div>
                           </div>
                         </li>
-                      </a>
-                      <a href="/" className="cursor-pointer">
+                      </Link>
+                      <Link to={'/allSellers'} className="cursor-pointer">
                         <li className="text-gray-800 pt-8">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
@@ -354,8 +358,8 @@ export default function Header() {
                             </div>
                           </div>
                         </li>
-                      </a>
-                      <a href="/" className="cursor-pointer">
+                      </Link>
+                      <Link to={'/reportedItems'} className="cursor-pointer">
                         <li className="text-gray-800 pt-8">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
@@ -365,8 +369,8 @@ export default function Header() {
                             </div>
                           </div>
                         </li>
-                      </a>
-                      <a href="/" className="cursor-pointer">
+                      </Link>
+                      <Link to={'/addAProduct'} className="cursor-pointer">
                         <li className="text-gray-800 pt-8">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
@@ -376,8 +380,8 @@ export default function Header() {
                             </div>
                           </div>
                         </li>
-                      </a>
-                      <a href="/" className="cursor-pointer">
+                      </Link>
+                      <Link to={'/myBuyers'} className="cursor-pointer">
                         <li className="text-gray-800 pt-8">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
@@ -387,8 +391,8 @@ export default function Header() {
                             </div>
                           </div>
                         </li>
-                      </a>
-                      <a href="/" className="cursor-pointer">
+                      </Link>
+                      <Link to={'/myOrders'} className="cursor-pointer">
                         <li className="text-gray-800 pt-8">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
@@ -398,7 +402,7 @@ export default function Header() {
                             </div>
                           </div>
                         </li>
-                      </a>
+                      </Link>
                     </ul>
                   </div>
                   <div className="w-full pt-4">
