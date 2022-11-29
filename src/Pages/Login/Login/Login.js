@@ -1,20 +1,19 @@
-import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
-    const [sidebar, setsidebar] = useState();
     return (
-        <div className="h-full bg-gradient-to-tl from-green-400 to-indigo-900 w-full py-16 px-4">
+        <div className="h-full  w-full pb-16 px-4">
             <div className="flex flex-col items-center justify-center">
-                <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 mt-16">
+                <div className="bg-white shadow-lg border rounded lg:w-1/3  md:w-1/2 w-full p-10 mt-16">
                     <p tabIndex={0} AriaRole="heading" aria-label="Login to your account" className="text-2xl font-extrabold leading-6 text-gray-800">
                         Login to your account
                     </p>
                     <p className="text-sm mt-4 font-medium leading-none text-gray-500">
                         Dont have account?{" "}
-                        <span tabIndex={0} AriaRole="link" aria-label="Sign up here" className="text-sm font-medium leading-none underline text-gray-800 cursor-pointer">
+                        <Link to={'/signUp'}><span tabIndex={0} AriaRole="link" aria-label="Sign up here" className="text-sm font-medium leading-none underline text-gray-800 cursor-pointer">
                             {" "}
                             Sign up here
-                        </span>
+                        </span></Link>
                     </p>
                     <button aria-label="Continue with google" AriaRole="button" className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-10">
                         <svg width={19} height={20} viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -50,7 +49,7 @@ const Login = () => {
                     </div>
                     <div className="mt-8">
                         <button AriaRole="button" aria-label="create my account" className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full">
-                            Create my account
+                            Login
                         </button>
                     </div>
                 </div>

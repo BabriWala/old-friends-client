@@ -6,7 +6,7 @@ export default function Header() {
   const [profile, setProfile] = useState(false);
   return (
     <>
-      <div className="bg-gray-200 mb-20 h-full w-full">
+      <div className="bg-gray-200 mb-10 h-full w-full">
         {/* Code block starts */}
         <nav className="w-full bg-white hidden xl:block shadow">
           <div className="container px-6 h-16 flex justify-between items-center lg:items-stretch mx-auto">
