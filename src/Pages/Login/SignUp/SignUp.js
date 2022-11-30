@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../Context/AuthProvider";
@@ -19,6 +19,7 @@ const SignUp = () => {
     const name = data.name;
     const email = data.email;
     const password = data.password;
+    const role = data.role;
     const image = data.img[0];
 
     const formData = new FormData();
@@ -40,7 +41,20 @@ const SignUp = () => {
               photoURL: imageURL,
             };
             profileUpdate(profile)
-            .then(()=>{console.log(user)})
+            .then(()=>{
+              // console.log(user)
+              const signUpUser = {
+                name,
+                email,
+                role,
+                url: imageURL,
+                status: 'Not Verified'
+              }
+
+
+              axios.post('http://localhost:5000/users', signUpUser)
+              .then(res => console.log(res))
+            })
             })
         .catch(err => console.error(err, 'problem'))
       });
