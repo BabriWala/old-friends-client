@@ -4,15 +4,23 @@ import { useForm } from "react-hook-form";
 
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthProvider";
+import useCurrentUser from "../../Hooks/useCurrentUser";
 
 
-const AddAProduct = () => {
+const AddedAProduct = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const {user} = useContext(AuthContext);
+  const {user, loading} = useContext(AuthContext);
+  
+  // const email = user.email;
+  const [currentUser] = useCurrentUser(user?.email);
+  console.log(currentUser);
+  // console.log(user.email)
+  
+
 
   const handleAddProduct = data =>{
     // console.log(data)
@@ -47,10 +55,14 @@ const AddAProduct = () => {
         usingTime, 
         datePosted: new Date(), 
         sellerMobileNumber,
-        sellerName: user.role === 'seller' && user.name,
-        sellerStatus: user.role === 'seller' && user.status
+        sellerName: currentUser.displayName,
+        sellerImg: currentUser.photoURL,
+        sellerEmail: currentUser.email,
+        sellerStatus: currentUser.status,
+        sellerRole: currentUser.role
       }
-    console.log(product);
+      
+    // console.log(product);
     })
     
     
@@ -81,7 +93,7 @@ const AddAProduct = () => {
                   ariarole="input"
                   type="text"
                   className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
-                  {...register("productName")}
+                  {...register("productName", { required: true })}
                 />
               </div>
               <div className="flex justify-center mt-5">
@@ -103,7 +115,7 @@ const AddAProduct = () => {
                       name="radio"
                       value="Excellent"
                       className="checkbox appearance-none focus:outline-none border rounded-full border-gray-400 absolute cursor-pointer w-full h-full checked:border-none"
-                      {...register("productCondition")}
+                      {...register("productCondition", { required: true })}
                     />
                     <div className="check-icon hidden border-4 border-indigo-700 rounded-full w-full h-full z-1" />
                   </div>
@@ -120,7 +132,7 @@ const AddAProduct = () => {
                       name="radio"
                       value="Good"
                       className="checkbox appearance-none focus:outline-none border rounded-full border-gray-400 absolute cursor-pointer w-full h-full checked:border-none"
-                      {...register("productCondition")}
+                      {...register("productCondition", { required: true })}
                     />
                     <div className="check-icon hidden border-4 border-indigo-700 rounded-full w-full h-full z-1" />
                   </div>
@@ -137,7 +149,7 @@ const AddAProduct = () => {
                       name="radio"
                       value="Fair"
                       className="checkbox appearance-none focus:outline-none border rounded-full border-gray-400 absolute cursor-pointer w-full h-full checked:border-none"
-                      {...register("productCondition")}
+                      {...register("productCondition", { required: true })}
                     />
                     <div className="check-icon hidden border-4 border-indigo-700 rounded-full w-full h-full z-1" />
                   </div>
@@ -164,7 +176,7 @@ const AddAProduct = () => {
                   ariarole="input"
                   type="location"
                   className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
-                  {...register("mobileNumber")}
+                  {...register("mobileNumber", { required: true })}
                 />
               </div>
               <div>
@@ -176,7 +188,7 @@ const AddAProduct = () => {
                   ariarole="input"
                   type="location"
                   className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
-                  {...register("location")}
+                  {...register("location", { required: true })}
                 />
               </div>
               <div>
@@ -197,7 +209,7 @@ const AddAProduct = () => {
                     transition
                     ease-in-out
                     m-0
-                    focus:text-gray-700  focus:outline-none" aria-label="Default select example" {...register("category")}>
+                    focus:text-gray-700  focus:outline-none" aria-label="Default select example" {...register("location", { required: true })}>
                         <option defaultValue value="panjabi">Panjabi</option>
                         <option value="t-shirts">T-Shirts</option>
                         <option value="jacket">Jacket</option>
@@ -213,7 +225,7 @@ const AddAProduct = () => {
                   aria-label="resale price"
                   ariarole="input"
                   className="bg-gray-200 h-20 border rounded focus:outline-none font-medium leading-none text-gray-800 text-base p-3 w-full pl-3 mt-2"
-                  {...register("productDescription")}
+                  {...register("productDescription", { required: true })}
                 />
               </div>
               <div>
@@ -224,7 +236,7 @@ const AddAProduct = () => {
                   aria-label="Original price"
                   ariarole="input"
                   className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
-                  {...register("originalPrice")}
+                  {...register("originalPrice", { required: true })}
                 />
               </div>
               <div>
@@ -235,7 +247,7 @@ const AddAProduct = () => {
                   aria-label="Original price"
                   ariarole="input"
                   className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
-                  {...register("resalePrice")}
+                  {...register("resalePrice", { required: true })}
                 />
               </div>
               <div>
@@ -246,7 +258,7 @@ const AddAProduct = () => {
                   aria-label="Using Time"
                   ariarole="input"
                   className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
-                  {...register("usingTime")}
+                  {...register("usingTime", { required: true })}
                 />
               </div>      
               <div className="flex justify-center mt-5">
@@ -261,7 +273,7 @@ const AddAProduct = () => {
                     className="form-control block w-full px-3 py-1.5 text-base font-normal  text-gray-700  bg-white bg-clip-padding  border border-solid border-gray-300  rounded transition  ease-in-out  m-0  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     type="file"
                     id="formFile"
-                    {...register("img")}
+                    {...register("img", { required: true })}
                   />
                 </div>
               </div>
@@ -283,4 +295,4 @@ const AddAProduct = () => {
   );
 };
 
-export default AddAProduct;
+export default AddedAProduct;

@@ -12,9 +12,12 @@ export const AuthContext = createContext();
 const AuthProvider = ({children}) => {
 
     // const app = initializeApp(firebaseConfig);
-
     const auth = getAuth(app);
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+
+    
     // console.log(user)
     const signUp = (email, password) =>{
         // console.log(auth)
@@ -22,14 +25,17 @@ const AuthProvider = ({children}) => {
     };
 
     const logOut = ()=>{
+        // setLoading(false)
         return signOut(auth);
     };
 
     const logIn = (email, password)=>{
+        // setLoading(false)
         return signInWithEmailAndPassword(email, password);
     };
     
     const profileUpdate = (profile) =>{
+        // setLoading(false)
         return updateProfile(auth.currentUser, profile);
     }
 
@@ -37,11 +43,14 @@ const AuthProvider = ({children}) => {
         onAuthStateChanged(auth, currentUser => {
             // console.log(currentUser, 'from on auth state changed')
             setUser(currentUser);
+            console.log(loading)
+            setLoading(false);
         })
-    },[auth])
+    },[auth, loading])
 
     const authInfo = {
         user,
+        loading,
         logIn,
         signUp,
         profileUpdate,

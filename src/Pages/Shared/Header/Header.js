@@ -70,7 +70,7 @@ export default function Header() {
                   Add a Product
                 </Link>
                 <Link
-                  to={"/myBuers"}
+                  to={"/myBuyers"}
                   className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out"
                 >
                   My Buyers
