@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import axios from "axios";
+import { AuthContext } from "../../Context/AuthProvider";
 
 
 const AddAProduct = () => {
@@ -11,9 +12,50 @@ const AddAProduct = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const {user} = useContext(AuthContext);
 
   const handleAddProduct = data =>{
-    console.log(data)
+    // console.log(data)
+    const category = data.category;
+    const img = data.img[0];
+    const location = data.location;
+    const sellerMobileNumber = data.mobileNumber;
+    const originalPrice = data.originalPrice;
+    const productCondition = data.productCondition;
+    const productDescription = data.productDescription;
+    const productName = data.productName;
+    const resalePrice = data.resalePrice;
+    const usingTime = data.usingTime;
+    
+    const formData = new FormData();
+    formData.append('image', img);
+
+    
+
+    axios.post(`https://api.imgbb.com/1/upload?key=0dfc4bdf5e5d26db206379e29f94506f`,formData)
+    .then(res => {
+      const imgURL = res.data.data.url;
+      const product = {
+        productPictureURL: imgURL,
+        productName, 
+        location, 
+        productCondition,
+        productDescription,
+        category,
+        resalePrice, 
+        originalPrice, 
+        usingTime, 
+        datePosted: new Date(), 
+        sellerMobileNumber,
+        sellerName: user.role === 'seller' && user.name,
+        sellerStatus: user.role === 'seller' && user.status
+      }
+    console.log(product);
+    })
+    
+    
+
+    
   }
 
   return (
