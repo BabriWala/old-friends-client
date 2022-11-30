@@ -1,53 +1,62 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../Context/AuthProvider";
-import axios from 'axios';
+import axios from "axios";
 // import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 // import app from "../../../Firebase/firebase.config";
 
 const SignUp = () => {
-
-    const {signUp} = useContext(AuthContext);
-
+  const { signUp, profileUpdate } = useContext(AuthContext);
+  // const [imageURL, setImageURL] = useState("");
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  
+
   const handleSignUp = (data) => {
-    // console.log(data);
-    // const {name, email, password, img, role} = data;
-    // console.log(email, password);
     const name = data.name;
     const email = data.email;
     const password = data.password;
     const image = data.img[0];
 
     const formData = new FormData();
-    formData.append('image',image)
-    console.log(process.env.ok)
+    formData.append("image", image);
 
-    // axios.post(`https://api.imgbb.com/1/upload?key=0dfc4bdf5e5d26db206379e29f94506f`,formData)
-    // .then(response=>console.log(response.data.data)) 
+    axios
+      .post(
+        `https://api.imgbb.com/1/upload?key=0dfc4bdf5e5d26db206379e29f94506f`,
+        formData
+      )
+      .then((response) => {
+        const imageURL = response.data.data.url
+        // console.log(response.data.data.url);
+        signUp(email, password)
+        .then(result =>{
+            const user = result.user;
+            const profile = {
+              displayName: name,
+              photoURL: imageURL,
+            };
+            profileUpdate(profile)
+            .then(()=>{console.log(user)})
+            })
+        .catch(err => console.error(err, 'problem'))
+      });
+
+
+
+
+
+
+    // // console.log(process.env.REACT_APP_IMAGE_HOST_KEY)
     
-    // console.log(name, email, password, img, role);
-    // signUp(email, password)
-    // .then(result =>{
-    //     const user = result.user;
-    //     console.log(user);
-    // })
-    // .catch(err => console.error(err, 'problem'))
+    // // console.log(name, email, password, img, role);
+    // console.log(profile);
 
-    // const auth = getAuth(app);
-    // createUserWithEmailAndPassword(auth, email,password)
-    // .then(result => console.log(result.user))
-    // .catch(err => console.error(err))
-
+ 
   };
-
-
 
   return (
     <div>
@@ -118,9 +127,9 @@ const SignUp = () => {
             </div>
             <form onSubmit={handleSubmit(handleSignUp)}>
               <div>
-                <lable className="text-sm font-medium leading-none text-gray-800">
+                <label className="text-sm font-medium leading-none text-gray-800">
                   Name
-                </lable>
+                </label>
                 <input
                   aria-label="enter your full name"
                   ariarole="input"
@@ -130,9 +139,9 @@ const SignUp = () => {
                 />
               </div>
               <div>
-                <lable className="text-sm font-medium leading-none text-gray-800">
+                <label className="text-sm font-medium leading-none text-gray-800">
                   Email
-                </lable>
+                </label>
                 <input
                   aria-label="enter email adress"
                   ariarole="input"
@@ -142,9 +151,9 @@ const SignUp = () => {
                 />
               </div>
               <div className="mt-6  w-full">
-                <lable className="text-sm font-medium leading-none text-gray-800">
+                <label className="text-sm font-medium leading-none text-gray-800">
                   Password
-                </lable>
+                </label>
                 <div className="relative flex items-center justify-center">
                   <input
                     aria-label="enter Password"

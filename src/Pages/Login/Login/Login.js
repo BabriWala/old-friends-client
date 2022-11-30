@@ -1,6 +1,21 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Context/AuthProvider";
+import { useForm } from "react-hook-form";
+
 
 const Login = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const {logIn} = useContext(AuthContext);
+    const handleLogin = data =>{
+        const email = data.email;
+        const password = data.password;
+        logIn(email,password)
+        .then(()=>{})
+    }
+
+
+
     return (
         <div className="h-full  w-full pb-16 px-4">
             <div className="flex flex-col items-center justify-center">
@@ -29,14 +44,15 @@ const Login = () => {
                         <p className="text-base font-medium leading-4 px-2.5 text-gray-400">OR</p>
                         <hr className="w-full bg-gray-400  " />
                     </div>
-                    <div>
-                        <lable className="text-sm font-medium leading-none text-gray-800">Email</lable>
-                        <input aria-label="enter email adress" ariarole="input" type="email" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" />
+<form onSubmit={handleSubmit(handleLogin)}>
+<div>
+                        <label className="text-sm font-medium leading-none text-gray-800">Email</label>
+                        <input aria-label="enter email adress" ariarole="input" type="email" {...register("email", { required: true })} className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" />
                     </div>
                     <div className="mt-6  w-full">
-                        <lable className="text-sm font-medium leading-none text-gray-800">Password</lable>
+                        <label className="text-sm font-medium leading-none text-gray-800">Password</label>
                         <div className="relative flex items-center justify-center">
-                            <input aria-label="enter Password" ariarole="input" type="password" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" />
+                            <input aria-label="enter Password" ariarole="input" type="password" {...register("password", { required: true })} className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" />
                             <div className="absolute right-0 mt-2 mr-3 cursor-pointer">
                                 <svg width={16} height={16} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -48,10 +64,11 @@ const Login = () => {
                         </div>
                     </div>
                     <div className="mt-8">
-                        <button ariarole="button" aria-label="create my account" className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full">
+                        <button type="submit"  ariarole="button" aria-label="create my account" className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full">
                             Login
                         </button>
                     </div>
+</form>
                 </div>
             </div>
         </div>

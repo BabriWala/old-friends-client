@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Logo from "../../../Assets/logo.png";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Context/AuthProvider";
 export default function Header() {
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut().then(() => {});
+  };
+
+  // console.log(user , 'from header');
+
   const [show, setShow] = useState(null);
   const [profile, setProfile] = useState(false);
+
   return (
     <>
       <div className="bg-gray-200 mb-10 h-full w-full">
@@ -18,37 +27,65 @@ export default function Header() {
                 </h3>
               </div>
               <ul className="hidden xl:flex items-center h-full">
-                <Link to={'/home'} className="cursor-pointer h-full flex items-center text-sm text-indigo-700 tracking-normal transition duration-150 ease-in-out">
+                <Link
+                  to={"/home"}
+                  className="cursor-pointer h-full flex items-center text-sm text-indigo-700 tracking-normal transition duration-150 ease-in-out"
+                >
                   Home
                 </Link>
-                <Link to={'/blog'} className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mx-10 tracking-normal transition duration-150 ease-in-out">
+                <Link
+                  to={"/blog"}
+                  className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mx-10 tracking-normal transition duration-150 ease-in-out"
+                >
                   Blog
                 </Link>
-                <Link to={'/dashboard'} className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
+                <Link
+                  to={"/dashboard"}
+                  className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out"
+                >
                   Dashboard
                 </Link>
-                <Link to={'/allBuyers'} className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
+                <Link
+                  to={"/allBuyers"}
+                  className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out"
+                >
                   All Buyers
                 </Link>
-                <Link to={'/allSellers'} className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
+                <Link
+                  to={"/allSellers"}
+                  className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out"
+                >
                   All Sellers
                 </Link>
-                <Link to={'/reportedItems'} className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
+                <Link
+                  to={"/reportedItems"}
+                  className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out"
+                >
                   Reported Items
                 </Link>
-                <Link to={'/addAProduct'} className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
+                <Link
+                  to={"/addAProduct"}
+                  className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out"
+                >
                   Add a Product
                 </Link>
-                <Link to={'/myBuers'} className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
+                <Link
+                  to={"/myBuers"}
+                  className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out"
+                >
                   My Buyers
                 </Link>
-                <Link to={'/myOrders'} className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
+                <Link
+                  to={"/myOrders"}
+                  className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out"
+                >
                   My Orders
                 </Link>
               </ul>
             </div>
             <div className="h-full hidden xl:flex items-center justify-end">
-              {/* <div className="h-full flex">
+              {user?.uid ? (
+                <div className="h-full flex">
                 <div
                   className="flex items-center pl-8 relative cursor-pointer"
                   onClick={() => setProfile(!profile)}
@@ -57,22 +94,29 @@ export default function Header() {
                     <ul className="p-2 w-40 border-r bg-white absolute rounded left-0 shadow mt-16 top-0 ">
                       <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                         <div className="flex items-center">
-                          <span className="ml-2">Log Out</span>
+                          <span onClick={handleLogOut} className="ml-2">
+                            Log Out
+                          </span>
                         </div>
                       </li>
                     </ul>
                   )}
                   <img
                     className="rounded h-10 w-10 object-cover"
-                    src="https://tuk-cdn.s3.amazonaws.com/assets/components/horizontal_navigation/hn_1.png"
+                    src={user.photoURL}
                     alt="logo"
                   />
-                  <p className="text-gray-800 text-sm ml-2">Jane Doe</p>
+                  <p className="text-gray-800 text-sm ml-2">{user.displayName}</p>
                 </div>
-              </div> */}
-              <Link to={'/login'} className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out">
+              </div>
+              ) : (
+                <Link
+                  to={"/login"}
+                  className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out"
+                >
                   Login
-              </Link>
+                </Link>
+              )}
             </div>
             <div className="flex items-center xl:hidden">
               <ul className="p-2 border-r bg-white absolute rounded top-0 left-0 right-0 shadow mt-16 md:mt-16 hidden">
@@ -101,7 +145,7 @@ export default function Header() {
                 </li>
                 <li
                   className="flex md:hidden flex-col cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex justify-center"
-                  onClick="dropdownHandler(this)"
+                  // onClick="dropdownHandler(this)"
                 >
                   <div className="flex items-center">
                     <svg
@@ -143,7 +187,7 @@ export default function Header() {
                 </li>
                 <li
                   className="border-b border-gray-300 flex md:hidden flex-col cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-4 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex justify-center"
-                  onClick="dropdownHandler(this)"
+                  // onClick={"dropdownHandler(this)"}
                 >
                   <div className="flex items-center">
                     <svg
@@ -224,7 +268,7 @@ export default function Header() {
         <nav>
           <div className="py-4 px-6 w-full flex xl:hidden justify-between items-center bg-white fixed top-0 z-40">
             <div className="w-24">
-            <img className=" w-10" src={Logo} alt="Logo" />
+              <img className=" w-10" src={Logo} alt="Logo" />
             </div>
             <div>
               <div
@@ -276,7 +320,7 @@ export default function Header() {
                     <div className="mt-6 flex w-full items-center justify-between">
                       <div className="flex items-center justify-between w-full">
                         <div className="flex items-center">
-                        <img className=" w-10" src={Logo} alt="Logo" />
+                          <img className=" w-10" src={Logo} alt="Logo" />
                           <p className="text-base text-gray-800 ml-3">
                             Old Friends
                           </p>
@@ -306,7 +350,7 @@ export default function Header() {
                       </div>
                     </div>
                     <ul className="f-m-m">
-                      <Link to={'/home'} className="cursor-pointer">
+                      <Link to={"/home"} className="cursor-pointer">
                         <li className="text-gray-800 pt-8">
                           <div className="flex items-center">
                             <p className="text-indigo-700 xl:text-base text-base ml-3">
@@ -315,7 +359,7 @@ export default function Header() {
                           </div>
                         </li>
                       </Link>
-                      <Link to={'/blog'} className="cursor-pointer">
+                      <Link to={"/blog"} className="cursor-pointer">
                         <li className="text-gray-800 pt-8">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
@@ -326,7 +370,7 @@ export default function Header() {
                           </div>
                         </li>
                       </Link>
-                      <Link to={'/dashboard'} className="cursor-pointer">
+                      <Link to={"/dashboard"} className="cursor-pointer">
                         <li className="text-gray-800 pt-8">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
@@ -337,7 +381,7 @@ export default function Header() {
                           </div>
                         </li>
                       </Link>
-                      <Link to={'/allBuyers'} className="cursor-pointer">
+                      <Link to={"/allBuyers"} className="cursor-pointer">
                         <li className="text-gray-800 pt-8">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
@@ -348,7 +392,7 @@ export default function Header() {
                           </div>
                         </li>
                       </Link>
-                      <Link to={'/allSellers'} className="cursor-pointer">
+                      <Link to={"/allSellers"} className="cursor-pointer">
                         <li className="text-gray-800 pt-8">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
@@ -359,7 +403,7 @@ export default function Header() {
                           </div>
                         </li>
                       </Link>
-                      <Link to={'/reportedItems'} className="cursor-pointer">
+                      <Link to={"/reportedItems"} className="cursor-pointer">
                         <li className="text-gray-800 pt-8">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
@@ -370,7 +414,7 @@ export default function Header() {
                           </div>
                         </li>
                       </Link>
-                      <Link to={'/addAProduct'} className="cursor-pointer">
+                      <Link to={"/addAProduct"} className="cursor-pointer">
                         <li className="text-gray-800 pt-8">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
@@ -381,18 +425,18 @@ export default function Header() {
                           </div>
                         </li>
                       </Link>
-                      <Link to={'/myBuyers'} className="cursor-pointer">
+                      <Link to={"/myBuyers"} className="cursor-pointer">
                         <li className="text-gray-800 pt-8">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
                               <p className="text-gray-800 xl:text-base md:text-2xl text-base ml-3">
-                                My Buyers 
+                                My Buyers
                               </p>
                             </div>
                           </div>
                         </li>
                       </Link>
-                      <Link to={'/myOrders'} className="cursor-pointer">
+                      <Link to={"/myOrders"} className="cursor-pointer">
                         <li className="text-gray-800 pt-8">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
@@ -406,7 +450,6 @@ export default function Header() {
                     </ul>
                   </div>
                   <div className="w-full pt-4">
-                    
                     <div className="border-t border-gray-300">
                       <div className="w-full flex items-center justify-between pt-1">
                         <div className="flex items-center">
