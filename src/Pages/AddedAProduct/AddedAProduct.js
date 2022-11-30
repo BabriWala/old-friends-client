@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import {toast} from 'react-hot-toast';
 
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthProvider";
@@ -17,7 +18,7 @@ const AddedAProduct = () => {
   
   // const email = user.email;
   const [currentUser] = useCurrentUser(user?.email);
-  console.log(currentUser);
+  // console.log(currentUser);
   // console.log(user.email)
   
 
@@ -59,9 +60,16 @@ const AddedAProduct = () => {
         sellerImg: currentUser.photoURL,
         sellerEmail: currentUser.email,
         sellerStatus: currentUser.status,
-        sellerRole: currentUser.role
+        role: currentUser.role
       }
-      
+
+      axios.post(`http://localhost:5000/products`, product)
+      .then(res => {
+        if(res.data.acknowledged){
+          toast.success('Product Added SuccessFully')
+        }
+      })
+
     // console.log(product);
     })
     
@@ -209,7 +217,7 @@ const AddedAProduct = () => {
                     transition
                     ease-in-out
                     m-0
-                    focus:text-gray-700  focus:outline-none" aria-label="Default select example" {...register("location", { required: true })}>
+                    focus:text-gray-700  focus:outline-none" aria-label="Default select example" {...register("category", { required: true })}>
                         <option defaultValue value="panjabi">Panjabi</option>
                         <option value="t-shirts">T-Shirts</option>
                         <option value="jacket">Jacket</option>
