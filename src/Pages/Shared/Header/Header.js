@@ -3,7 +3,7 @@ import Logo from "../../../Assets/logo.png";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
 export default function Header() {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut, currentUser } = useContext(AuthContext);
   const handleLogOut = () => {
     logOut().then(() => {});
   };
@@ -12,6 +12,7 @@ export default function Header() {
 
   const [show, setShow] = useState(null);
   const [profile, setProfile] = useState(false);
+  const [dropDown, setDropDown] = useState(false);
 
   return (
     <>
@@ -28,7 +29,7 @@ export default function Header() {
               </div>
               <ul className="hidden xl:flex items-center h-full">
                 <Link
-                  to={"/home"}
+                  to={"/"}
                   className="cursor-pointer h-full flex items-center text-sm text-indigo-700 tracking-normal transition duration-150 ease-in-out"
                 >
                   Home
@@ -39,76 +40,109 @@ export default function Header() {
                 >
                   Blog
                 </Link>
-                <Link
-                  to={"/dashboard"}
-                  className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out"
-                >
-                  Dashboard
-                </Link>
-                <Link
-                  to={"/allBuyers"}
-                  className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out"
-                >
-                  All Buyers
-                </Link>
-                <Link
-                  to={"/allSellers"}
-                  className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out"
-                >
-                  All Sellers
-                </Link>
-                <Link
-                  to={"/reportedItems"}
-                  className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out"
-                >
-                  Reported Items
-                </Link>
-                <Link
-                  to={"/addAProduct"}
-                  className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out"
-                >
-                  Add a Product
-                </Link>
-                <Link
-                  to={"/myBuyers"}
-                  className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out"
-                >
-                  My Buyers
-                </Link>
-                <Link
-                  to={"/myOrders"}
-                  className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out"
-                >
-                  My Orders
-                </Link>
+
+                <div className="h-full xl:flex items-center justify-end">
+                  <div className="h-full flex">
+                    <div
+                      className="flex items-center relative cursor-pointer"
+                      onClick={() => setDropDown(!dropDown)}
+                    >
+                      {dropDown && (
+                        <ul className="p-2 w-40 border-r bg-white absolute rounded left-0 shadow mt-16 top-0 ">
+                          <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                            <div className=" items-center">
+                              {currentUser?.role === "buyer" && (
+                                <>
+                                  <Link
+                                    to={"/myOrders"}
+                                    className="border p-2 rounded hover:bg-slate-100 cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 tracking-normal transition duration-150 ease-in-out"
+                                  >
+                                    My Orders
+                                  </Link>
+                                </>
+                              )}
+                              {currentUser?.role === "admin" && (
+                                <>
+                                  <Link
+                                    to={"/allBuyers"}
+                                    className="cursor-pointer mb-3 border p-2 rounded hover:bg-slate-100 h-full flex items-center text-sm hover:text-indigo-700 text-gray-800  tracking-normal transition duration-150 ease-in-out"
+                                  >
+                                    All Buyers
+                                  </Link>
+                                  <Link
+                                    to={"/allSellers"}
+                                    className="cursor-pointer mb-3 border p-2 rounded hover:bg-slate-100 h-full flex items-center text-sm hover:text-indigo-700 text-gray-800  tracking-normal transition duration-150 ease-in-out"
+                                  >
+                                    All Sellers
+                                  </Link>
+                                  <Link
+                                    to={"/reportedItems"}
+                                    className="cursor-pointer border p-2 rounded hover:bg-slate-100 h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 tracking-normal transition duration-150 ease-in-out"
+                                  >
+                                    Reported Items
+                                  </Link>
+                                </>
+                              )}
+                              {currentUser?.role === "seller" && (
+                                <>
+                                  <Link
+                                    to={"/addAProduct"}
+                                    className=" mb-3 border p-2 rounded hover:bg-slate-100 cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800  tracking-normal transition duration-150 ease-in-out"
+                                  >
+                                    Add a Product
+                                  </Link>
+                                  <Link
+                                    to={"/myBuyers"}
+                                    className=" border p-2 rounded hover:bg-slate-100 cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800  tracking-normal transition duration-150 ease-in-out"
+                                  >
+                                    My Buyers
+                                  </Link>
+                                </>
+                              )}
+                            </div>
+                          </li>
+                        </ul>
+                      )}
+
+                      <span
+                        to={"/dashboard"}
+                        className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out"
+                      >
+                        Dashboard
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </ul>
             </div>
             <div className="h-full hidden xl:flex items-center justify-end">
               {user?.uid ? (
                 <div className="h-full flex">
-                <div
-                  className="flex items-center pl-8 relative cursor-pointer"
-                  onClick={() => setProfile(!profile)}
-                >
-                  {profile && (
-                    <ul className="p-2 w-40 border-r bg-white absolute rounded left-0 shadow mt-16 top-0 ">
-                      <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                        <div className="flex items-center">
-                          <span onClick={handleLogOut} className="ml-2">
-                            Log Out
-                          </span>
-                        </div>
-                      </li>
-                    </ul>
-                  )}
-                  <img
-                    className="rounded h-10 w-10 object-cover"
-                    src={user.photoURL}
-                    alt="logo"
-                  />
-                  <p className="text-gray-800 text-sm ml-2">{user.displayName}</p>
+                  <div
+                    className="flex items-center pl-8 relative cursor-pointer"
+                    onClick={() => setProfile(!profile)}
+                  >
+                    {profile && (
+                      <ul className="p-2 w-40 border-r bg-white absolute rounded left-0 shadow mt-16 top-0 ">
+                        <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                          <div className="flex items-center">
+                            <span onClick={handleLogOut} className="ml-2">
+                              Log Out
+                            </span>
+                          </div>
+                        </li>
+                      </ul>
+                    )}
+                    <img
+                      className="rounded h-10 w-10 object-cover"
+                      src={user.photoURL}
+                      alt="logo"
+                    />
+                    <p className="text-gray-800 text-sm ml-2">
+                      {user.displayName}
+                    </p>
+                  </div>
                 </div>
-              </div>
               ) : (
                 <Link
                   to={"/login"}

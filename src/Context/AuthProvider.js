@@ -4,6 +4,7 @@ import { createContext } from "react";
 // import { firebaseConfig } from "../Firebase/firebase.config";
 import {getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile} from 'firebase/auth';
 import app from '../Firebase/firebase.config';
+import useCurrentUser from "../Hooks/useCurrentUser";
 
 
 
@@ -15,6 +16,7 @@ const AuthProvider = ({children}) => {
     const auth = getAuth(app);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [currentUser] = useCurrentUser(user?.email);
 
 
     
@@ -31,7 +33,7 @@ const AuthProvider = ({children}) => {
 
     const logIn = (email, password)=>{
         // setLoading(false)
-        return signInWithEmailAndPassword(email, password);
+        return signInWithEmailAndPassword(auth, email, password);
     };
     
     const profileUpdate = (profile) =>{
@@ -50,6 +52,7 @@ const AuthProvider = ({children}) => {
 
     const authInfo = {
         user,
+        currentUser,
         loading,
         logIn,
         signUp,

@@ -5,7 +5,7 @@ import {toast} from 'react-hot-toast';
 
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthProvider";
-import useCurrentUser from "../../Hooks/useCurrentUser";
+
 
 
 const AddedAProduct = () => {
@@ -14,10 +14,10 @@ const AddedAProduct = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const {user, loading} = useContext(AuthContext);
+  const {user, loading, currentUser} = useContext(AuthContext);
   
   // const email = user.email;
-  const [currentUser] = useCurrentUser(user?.email);
+  
   // console.log(currentUser);
   // console.log(user.email)
   

@@ -7,6 +7,9 @@ import Home from '../../Pages/Home/Home/Home';
 import Login from '../../Pages/Login/Login/Login';
 import SignUp from '../../Pages/Login/SignUp/SignUp';
 import AddedAProduct from "../../Pages/AddedAProduct/AddedAProduct";
+import AllSellers from "../../Pages/AllSellers/AllSellers";
+import AllBuyers from "../../Pages/AllBuyers/AllBuyers";
+import ReportedItems from "../../Pages/ReportedItems/ReportedItems";
 
 export const router = createBrowserRouter([
     {
@@ -33,6 +36,18 @@ export const router = createBrowserRouter([
             {
                 path: '/addAProduct',
                 element: <AddedAProduct></AddedAProduct>
+            },
+            {
+                path: '/allSellers',
+                element: <AllSellers></AllSellers>
+            },
+            {
+                path: '/allBuyers',
+                element: <AllBuyers></AllBuyers>
+            },
+            {
+                path: '/reportedItems',
+                element: <ReportedItems></ReportedItems>
             }
         ]
         
