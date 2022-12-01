@@ -1,6 +1,6 @@
 
 
-    Your homepage will have a navbar , a banner/slider, Advertised items, second-hand product categories section and a realistic footer.
+    Advertised items, second-hand product categories section 
 
     Add one extra section on the home page. Make sure it is unique and relevant to your website.
 
@@ -21,7 +21,6 @@
 
     "My buyers" are optional. See the optional section for details. On this page, a seller will see the buyer's phone, name, email address, and location.
 
-    In the All Sellers, the Admin will see the sellers. On the All Buyers route, the Admin can see all the Buyers. If the Admin wants, he can delete any buyers or sellers.
 
 
 

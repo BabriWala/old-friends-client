@@ -10,6 +10,8 @@ import AddedAProduct from "../../Pages/AddedAProduct/AddedAProduct";
 import AllSellers from "../../Pages/AllSellers/AllSellers";
 import AllBuyers from "../../Pages/AllBuyers/AllBuyers";
 import ReportedItems from "../../Pages/ReportedItems/ReportedItems";
+import CategoryProducts from "../../Pages/CategoryProducts/CategoryProducts";
+
 
 export const router = createBrowserRouter([
     {
@@ -44,6 +46,10 @@ export const router = createBrowserRouter([
             {
                 path: '/allBuyers',
                 element: <AllBuyers></AllBuyers>
+            },
+            {
+                path: '/category/:name',
+                element: <CategoryProducts></CategoryProducts>
             },
             {
                 path: '/reportedItems',
