@@ -1,7 +1,10 @@
 import React from "react";
 
-const Seller = ({seller}) => {
-    const {url, name, email, status} = seller;
+const Seller = (props) => {
+    const {url, name, email, status} = props.seller;
+    const handleMakeVerified = props.handleMakeVerified;
+    const handleSellerDelete = props.handleSellerDelete;
+    // console.log(props)
     console.log(url, name, email, status)
   return (
     <tr className="h-20 text-sm leading-none text-gray-800 bg-white hover:bg-gray-100 border-b border-t border-gray-100">
@@ -21,20 +24,17 @@ const Seller = ({seller}) => {
       </td>
       <td className="pl-12">
         <p className="text-sm font-medium leading-none text-gray-800">{email}</p>
-        <div className="w-24 h-3 bg-gray-100 rounded-full mt-2">
-          <div className="w-20 h-3 bg-green-progress rounded-full" />
-        </div>
       </td>
       <td className="pl-12">
       {
         status === "Verified" ?
         <button disabled className="mx-2 my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2 text-xs">Verified</button>
         :
-        <button className="mx-2 my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2 text-xs">Make Verified</button> 
+        <button onClick={()=>handleMakeVerified(props.seller._id)} className="mx-2 my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2 text-xs">Make Verified</button> 
       }
       </td>
       <td className="pl-20">
-      <button className="mx-2 my-2 bg-red-700 transition duration-150 ease-in-out hover:bg-red-600 rounded text-white px-6 py-2 text-xs">Delete</button>
+      <button onClick={()=>handleSellerDelete(props.seller._id)} className="mx-2 my-2 bg-red-700 transition duration-150 ease-in-out hover:bg-red-600 rounded text-white px-6 py-2 text-xs">Delete</button>
       </td>
     </tr>
   );

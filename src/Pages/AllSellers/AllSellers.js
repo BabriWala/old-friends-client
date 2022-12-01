@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { useQuery } from '@tanstack/react-query'
 import axios from "axios";
 import Seller from "./Seller";
+import {toast} from 'react-hot-toast';
 
 const AllSellers = () => {
   const [show, setShow] = useState(null);
+  const[showModal,setShowModal]=useState(true)
     const {data: sellers, isLoading, refetch} = useQuery({
         queryKey: ['All Sellers'],
         queryFn: async ()=>{
@@ -14,8 +16,34 @@ const AllSellers = () => {
         }
     })
 
-    console.log(sellers)
- 
+    // console.log(sellers)
+    const handleSellerDelete = (id)=>{
+      const agree = window.confirm(`Are You sure you want to delete?`);
+      // console.log(agree);
+      // console.log(id)
+      if(agree){
+        axios.delete(`http://localhost:5000/sellers/${id}`)
+        .then(res=>{
+          refetch()
+          toast.success('User SuccessFully Deleted');
+          // console.log(res)
+        })
+      }
+    }
+
+    const handleMakeVerified = (id)=>{
+      const agree = window.confirm(`Are You sure you want to verified?`);
+      // console.log(agree);
+      // console.log(id)
+      if(agree){
+        axios.put(`http://localhost:5000/sellers/${id}`)
+        .then(res=>{
+          refetch()
+          toast.success('Seller Successfully Verified');
+          console.log(res)
+        })
+      }
+    }
 
   return (
     <div>
@@ -49,7 +77,7 @@ const AllSellers = () => {
             <tbody className="w-full">
               
               {
-                sellers?.map(seller => <Seller seller={seller} key={seller._id}></Seller>)
+                sellers?.map(seller => <Seller seller={seller} handleSellerDelete={handleSellerDelete} handleMakeVerified={handleMakeVerified} key={seller._id}></Seller>)
               }        
              </tbody>
           </table>
