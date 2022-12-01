@@ -28,14 +28,14 @@ const MySingleProduct = ({handleDeleteProduct, handleAdvertise, myProduct}) => {
       <td>
       {
         saleStatus === "available" ?
-        <button className="mx-2 my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2 text-xs">Advertise</button>
+        <button onClick={()=>handleAdvertise(myProduct._id)} className="mx-2 my-2  bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2 text-xs">Advertise</button>
         :
         (
         saleStatus === "advertising" ?
-        <button disabled onClick={()=>handleAdvertise(myProduct._id)} className="mx-2 my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2 text-xs">Already Advertised</button> 
+        <button disabled  className="mx-2 my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2 text-xs">Already Advertised</button> 
 
         :
-        <button disabled onClick={()=>handleAdvertise(myProduct._id)} className="mx-2 my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2 text-xs">Already Sold</button> 
+        <button disabled  className="mx-2 my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-6 py-2 text-xs">Already Sold</button> 
         )
       }
       </td>

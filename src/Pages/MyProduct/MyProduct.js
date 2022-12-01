@@ -2,8 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
-import Buyer from '../AllBuyers/Buyer';
 import {AuthContext} from '../../Context/AuthProvider';
 import MySingleProduct from './MySingleProduct';
 import Loader from '../Shared/Loader/Loader';
@@ -30,26 +28,34 @@ const MyProduct = () => {
 
     // console.log(myProducts)
 
-    // const handleBuyerDelete = (id)=>{
-    //     const agree = window.confirm(`Are You sure you want to delete?`);
-    //     // console.log(agree);
-    //     // console.log(id)
-    //     if(agree){
-    //       axios.delete(`http://localhost:5000/buyers/${id}`)
-    //       .then(res=>{
-    //         refetch()
-    //         toast.success('Buyer SuccessFully Deleted');
-    //         // console.log(res)
-    //       })
-    //     }
-    //   }
+    const handleDeleteProduct = (id)=>{
+        const agree = window.confirm(`Are You sure you want to delete this product?`);
+        // console.log(agree);
+        // console.log(id)
+        if(agree){
+          axios.delete(`http://localhost:5000/products/${id}`)
+          .then(res=>{
+            refetch()
+            toast.success('Product SuccessFully Deleted');
+            // console.log(res)
+          })
+        }
+      }
+    const handleAdvertise = (id)=>{
+        const agree = window.confirm(`Are You sure you want to advertise this product?`);
+        // console.log(agree);
+        // console.log(id)
+        if(agree){
+          axios.put(`http://localhost:5000/products/${id}`)
+          .then(res=>{
+            refetch()
+            toast.success('Product SuccessFully Advertised');
+            // console.log(res)
+          })
+        }
+      }
 
-    const handleAdvertise = () =>{
 
-    }
-    const handleDeleteProduct = () =>{
-
-    }
 
     return (
         <div>
@@ -75,13 +81,15 @@ const MyProduct = () => {
               <tbody className="w-full">
                 
                 {
-                    myProducts ?
+                    myProducts?.length ?
                     
                     myProducts.map(myProduct => <MySingleProduct key={myProduct._id} myProduct={myProduct} handleDeleteProduct={handleDeleteProduct} handleAdvertise={handleAdvertise} ></MySingleProduct>)
                     
                     :
 
+                    
                     <Loader></Loader>
+                    
                 }        
                </tbody>
             </table>

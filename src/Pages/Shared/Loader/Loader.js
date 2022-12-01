@@ -2,7 +2,8 @@ import React from 'react';
 
 const Loader = () => {
     return (
-        <div className="bg-gray-100">
+        <div className='text-center'>
+          <div className="bg-gray-100 mx-auto">
         <div className=" rounded relative">
           <div className="rounded-full bg-indigo-200 w-[190px] h-[190px] relative flex justify-center items-center mx-auto animate-spin">
             <svg
@@ -30,6 +31,7 @@ const Loader = () => {
           </p>
         </div>
       </div>
+        </div>
     );
 };
 
