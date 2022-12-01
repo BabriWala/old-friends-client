@@ -22,6 +22,7 @@ const AddedAProduct = () => {
   // console.log(user.email)
   
 
+  // console.log(currentUser)
 
   const handleAddProduct = data =>{
     // console.log(data)
@@ -40,7 +41,6 @@ const AddedAProduct = () => {
     formData.append('image', img);
 
     
-
     axios.post(`https://api.imgbb.com/1/upload?key=0dfc4bdf5e5d26db206379e29f94506f`,formData)
     .then(res => {
       const imgURL = res.data.data.url;
@@ -56,12 +56,13 @@ const AddedAProduct = () => {
         usingTime, 
         datePosted: new Date(), 
         sellerMobileNumber,
-        sellerName: currentUser.displayName,
-        sellerImg: currentUser.photoURL,
+        sellerName: currentUser.name,
+        sellerImg: currentUser.url,
         sellerEmail: currentUser.email,
         sellerStatus: currentUser.status,
         role: currentUser.role
       }
+      console.log(product)
 
       axios.post(`http://localhost:5000/products`, product)
       .then(res => {
