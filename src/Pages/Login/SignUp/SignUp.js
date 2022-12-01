@@ -7,7 +7,7 @@ import axios from "axios";
 // import app from "../../../Firebase/firebase.config";
 
 const SignUp = () => {
-  const { signUp, profileUpdate } = useContext(AuthContext);
+  const { signUp, profileUpdate,googleSignIn } = useContext(AuthContext);
   // const [imageURL, setImageURL] = useState("");
   const {
     register,
@@ -58,19 +58,27 @@ const SignUp = () => {
             })
         .catch(err => console.error(err, 'problem'))
       });
-
-
-
-
-
-
-    // // console.log(process.env.REACT_APP_IMAGE_HOST_KEY)
+      // // console.log(process.env.REACT_APP_IMAGE_HOST_KEY)
     
     // // console.log(name, email, password, img, role);
     // console.log(profile);
-
- 
   };
+  
+  const handleGoogleLogin = () =>{
+    googleSignIn()
+    .then((result)=>{
+        const user = result.user;
+        const signUpUser = {
+          name: user.displayName,
+          email: user.email,
+          role: 'buyer',
+          url: user.photoURL,
+          status: 'Not Verified'
+        }
+        axios.post('http://localhost:5000/users', signUpUser)
+        .then(res => console.log(res))
+    })
+  }
 
   return (
     <div>
@@ -79,7 +87,7 @@ const SignUp = () => {
           <div className="bg-white shadow-lg border rounded lg:w-1/3  md:w-1/2 w-full p-10 mt-16">
             <p
               tabIndex={0}
-              ariarole="heading"
+              aria-role="heading"
               aria-label="Login to your account"
               className="text-2xl font-extrabold leading-6 text-gray-800"
             >
@@ -87,10 +95,10 @@ const SignUp = () => {
             </p>
             <p className="text-sm mt-4 font-medium leading-none text-gray-500">
               Already have an account?{" "}
-              <Link to={"/signUp"}>
+              <Link to={"/login"}>
                 <span
                   tabIndex={0}
-                  ariarole="link"
+                  aria-role="link"
                   aria-label="Sign up here"
                   className="text-sm font-medium leading-none underline text-gray-800 cursor-pointer"
                 >
@@ -100,8 +108,9 @@ const SignUp = () => {
               </Link>
             </p>
             <button
+              onClick={handleGoogleLogin}
               aria-label="Continue with google"
-              ariarole="button"
+              aria-role="button"
               className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-10"
             >
               <svg
@@ -146,7 +155,7 @@ const SignUp = () => {
                 </label>
                 <input
                   aria-label="enter your full name"
-                  ariarole="input"
+                  aria-role="input"
                   type="text"
                   className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
                   {...register("name")}
@@ -158,7 +167,7 @@ const SignUp = () => {
                 </label>
                 <input
                   aria-label="enter email adress"
-                  ariarole="input"
+                  aria-role="input"
                   type="email"
                   className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
                   {...register("email")}
@@ -171,7 +180,7 @@ const SignUp = () => {
                 <div className="relative flex items-center justify-center">
                   <input
                     aria-label="enter Password"
-                    ariarole="input"
+                    aria-role="input"
                     type="password"
                     className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
                     {...register("password")}
@@ -256,7 +265,7 @@ const SignUp = () => {
               <div className="mt-8">
                 <button
                   type="submit"
-                  ariarole="button"
+                  aria-role="button"
                   aria-label="create my account"
                   className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full"
                 >

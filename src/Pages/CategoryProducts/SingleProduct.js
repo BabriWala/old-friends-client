@@ -32,7 +32,8 @@ const SingleProduct = (props) => {
   //   sellerMobileNumber,
   //   sellerStatus,
   //   usingTime,);
-  console.log(props.product)
+  // console.log(props.product)
+
   return (
     <div className="shadow rounded p-5">
       <img className="rounded" src={productPictureURL} alt={productName} />
@@ -57,7 +58,7 @@ const SingleProduct = (props) => {
       <h2 className="text-base font-semibold flex items-center leading-5 mt-5 text-gray-800">
         Seller Name:<span className="mr-5">{sellerName}</span> {(sellerStatus === "Verified") && <AiFillCheckCircle />}
       </h2>
-      <button className=" w-full my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white py-2 text-xs mt-5">
+      <button  className=" w-full my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white py-2 text-xs mt-5">
         Book Now
       </button>
     </div>

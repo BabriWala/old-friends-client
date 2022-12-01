@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import {toast} from 'react-hot-toast';
 
@@ -14,8 +14,8 @@ const AddedAProduct = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const {user, loading, currentUser} = useContext(AuthContext);
-  
+  const {user, loading, currentUser, logOut} = useContext(AuthContext);
+  const navigate = useNavigate()
   // const email = user.email;
   
   // console.log(currentUser);
@@ -37,11 +37,13 @@ const AddedAProduct = () => {
     const resalePrice = data.resalePrice;
     const usingTime = data.usingTime;
     
+    
     const formData = new FormData();
     formData.append('image', img);
 
     
-    axios.post(`https://api.imgbb.com/1/upload?key=0dfc4bdf5e5d26db206379e29f94506f`,formData)
+    if(currentUser.role === "seller"){
+      axios.post(`https://api.imgbb.com/1/upload?key=0dfc4bdf5e5d26db206379e29f94506f`,formData)
     .then(res => {
       const imgURL = res.data.data.url;
       const product = {
@@ -60,7 +62,8 @@ const AddedAProduct = () => {
         sellerImg: currentUser.url,
         sellerEmail: currentUser.email,
         sellerStatus: currentUser.status,
-        role: currentUser.role
+        role: currentUser.role,
+        saleStatus: "available"
       }
       console.log(product)
 
@@ -68,11 +71,16 @@ const AddedAProduct = () => {
       .then(res => {
         if(res.data.acknowledged){
           toast.success('Product Added SuccessFully')
+          navigate('/myProduct')
         }
       })
 
     // console.log(product);
     })
+    }else{
+      logOut()
+      .then(()=> navigate('/login'))
+    }
     
     
 
@@ -86,7 +94,6 @@ const AddedAProduct = () => {
           <div className="bg-white shadow-lg border rounded lg:w-1/3  md:w-1/2 w-full p-10 mt-16">
             <p
               tabIndex={0}
-              ariarole="heading"
               aria-label="Login to your account"
               className="text-2xl font-extrabold leading-6 text-gray-800"
             >
@@ -99,7 +106,6 @@ const AddedAProduct = () => {
                 </label>
                 <input
                   aria-label="enter your full name"
-                  ariarole="input"
                   type="text"
                   className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
                   {...register("productName", { required: true })}
@@ -182,7 +188,6 @@ const AddedAProduct = () => {
                 </label>
                 <input
                   aria-label="Your Mobile Number"
-                  ariarole="input"
                   type="location"
                   className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
                   {...register("mobileNumber", { required: true })}
@@ -194,7 +199,6 @@ const AddedAProduct = () => {
                 </label>
                 <input
                   aria-label="Your Location"
-                  ariarole="input"
                   type="location"
                   className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
                   {...register("location", { required: true })}
@@ -232,7 +236,6 @@ const AddedAProduct = () => {
                 </label>
                 <textarea
                   aria-label="resale price"
-                  ariarole="input"
                   className="bg-gray-200 h-20 border rounded focus:outline-none font-medium leading-none text-gray-800 text-base p-3 w-full pl-3 mt-2"
                   {...register("productDescription", { required: true })}
                 />
@@ -243,7 +246,6 @@ const AddedAProduct = () => {
                 </label>
                 <input
                   aria-label="Original price"
-                  ariarole="input"
                   className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
                   {...register("originalPrice", { required: true })}
                 />
@@ -254,7 +256,6 @@ const AddedAProduct = () => {
                 </label>
                 <input
                   aria-label="Original price"
-                  ariarole="input"
                   className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
                   {...register("resalePrice", { required: true })}
                 />
@@ -265,7 +266,6 @@ const AddedAProduct = () => {
                 </label>
                 <input
                   aria-label="Using Time"
-                  ariarole="input"
                   className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
                   {...register("usingTime", { required: true })}
                 />
@@ -289,7 +289,7 @@ const AddedAProduct = () => {
               <div className="mt-8">
                 <button
                   type="submit"
-                  ariarole="button"
+                  aria-role="button"
                   aria-label="Add Product"
                   className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full"
                 >

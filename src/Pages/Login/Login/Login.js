@@ -10,7 +10,7 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { logIn } = useContext(AuthContext);
+  const { logIn, googleSignIn } = useContext(AuthContext);
 
 
   const handleLogin = (data) => {
@@ -24,13 +24,19 @@ const Login = () => {
     // signInWithEmailAndPassword(email, password)
   };
 
+  const handleGoogleLogin = () =>{
+    googleSignIn()
+    .then(()=>{})
+    .catch(err => console.error(err))
+  }
+
   return (
     <div className="h-full  w-full pb-16 px-4">
       <div className="flex flex-col items-center justify-center">
         <div className="bg-white shadow-lg border rounded lg:w-1/3  md:w-1/2 w-full p-10 mt-16">
           <p
             tabIndex={0}
-            ariarole="heading"
+            aria-role="heading"
             aria-label="Login to your account"
             className="text-2xl font-extrabold leading-6 text-gray-800"
           >
@@ -41,7 +47,7 @@ const Login = () => {
             <Link to={"/signUp"}>
               <span
                 tabIndex={0}
-                ariarole="link"
+                aria-role="link"
                 aria-label="Sign up here"
                 className="text-sm font-medium leading-none underline text-gray-800 cursor-pointer"
               >
@@ -51,8 +57,9 @@ const Login = () => {
             </Link>
           </p>
           <button
+            onClick={handleGoogleLogin}
             aria-label="Continue with google"
-            ariarole="button"
+            aria-role="button"
             className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-10"
           >
             <svg
@@ -97,7 +104,7 @@ const Login = () => {
               </label>
               <input
                 aria-label="enter email adress"
-                ariarole="input"
+                aria-role="input"
                 type="email"
                 {...register("email", { required: true })}
                 className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
@@ -110,7 +117,7 @@ const Login = () => {
               <div className="relative flex items-center justify-center">
                 <input
                   aria-label="enter Password"
-                  ariarole="input"
+                  aria-role="input"
                   type="password"
                   {...register("password", { required: true })}
                   className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
@@ -134,7 +141,7 @@ const Login = () => {
             <div className="mt-8">
               <button
                 type="submit"
-                ariarole="button"
+                aria-role="button"
                 aria-label="create my account"
                 className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full"
               >

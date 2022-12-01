@@ -9,6 +9,7 @@ export default function Header() {
   };
 
   // console.log(user , 'from header');
+  // console.log(currentUser)
 
   const [show, setShow] = useState(null);
   const [profile, setProfile] = useState(false);
@@ -90,6 +91,12 @@ export default function Header() {
                                     className=" mb-3 border p-2 rounded hover:bg-slate-100 cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800  tracking-normal transition duration-150 ease-in-out"
                                   >
                                     Add a Product
+                                  </Link>
+                                  <Link
+                                    to={"/myProduct"}
+                                    className=" mb-3 border p-2 rounded hover:bg-slate-100 cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800  tracking-normal transition duration-150 ease-in-out"
+                                  >
+                                    My Product
                                   </Link>
                                   <Link
                                     to={"/myBuyers"}
