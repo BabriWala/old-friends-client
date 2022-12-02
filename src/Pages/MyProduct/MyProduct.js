@@ -21,7 +21,7 @@ const MyProduct = () => {
     const {data: myProducts, isLoading, refetch} = useQuery({
         queryKey: ['My Product'],
         queryFn: async ()=>{
-            const res = await axios.get(`http://localhost:5000/products?email=${currentUser?.email}`);
+            const res = await axios.get(`https://old-friends-server.vercel.app/products?email=${currentUser?.email}`);
             return res.data;
         }
     })
@@ -33,7 +33,7 @@ const MyProduct = () => {
         // console.log(agree);
         // console.log(id)
         if(agree){
-          axios.delete(`http://localhost:5000/products/${id}`)
+          axios.delete(`https://old-friends-server.vercel.app/products/${id}`)
           .then(res=>{
             refetch()
             toast.success('Product SuccessFully Deleted');
@@ -46,7 +46,7 @@ const MyProduct = () => {
         // console.log(agree);
         // console.log(id)
         if(agree){
-          axios.put(`http://localhost:5000/products/${id}`)
+          axios.put(`https://old-friends-server.vercel.app/products/${id}`)
           .then(res=>{
             refetch()
             toast.success('Product SuccessFully Advertised');

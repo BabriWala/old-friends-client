@@ -11,7 +11,7 @@ const AllSellers = () => {
     const {data: sellers, isLoading, refetch} = useQuery({
         queryKey: ['All Sellers'],
         queryFn: async ()=>{
-            const res = await axios.get('http://localhost:5000/sellers');
+            const res = await axios.get('https://old-friends-server.vercel.app/sellers');
             return res.data;
         }
     })
@@ -22,7 +22,7 @@ const AllSellers = () => {
       // console.log(agree);
       // console.log(id)
       if(agree){
-        axios.delete(`http://localhost:5000/sellers/${id}`)
+        axios.delete(`https://old-friends-server.vercel.app/sellers/${id}`)
         .then(res=>{
           refetch()
           toast.success('User SuccessFully Deleted');
@@ -36,7 +36,7 @@ const AllSellers = () => {
       // console.log(agree);
       // console.log(id)
       if(agree){
-        axios.put(`http://localhost:5000/sellers/${id}`)
+        axios.put(`https://old-friends-server.vercel.app/sellers/${id}`)
         .then(res=>{
           refetch()
           toast.success('Seller Successfully Verified');

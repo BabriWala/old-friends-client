@@ -13,6 +13,7 @@ import ReportedItems from "../../Pages/ReportedItems/ReportedItems";
 import CategoryProducts from "../../Pages/CategoryProducts/CategoryProducts";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import MyProduct from "../../Pages/MyProduct/MyProduct";
+import MyOrders from "../../Pages/MyOrders/MyOrders";
 
 
 export const router = createBrowserRouter([
@@ -52,11 +53,15 @@ export const router = createBrowserRouter([
             {
                 path: '/category/:name',
                 element: <PrivateRoute><CategoryProducts></CategoryProducts></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/products/${params.name}`)
+                loader: ({params}) => fetch(`https://old-friends-server.vercel.app/products/${params.name}`)
             },
             {
                 path: '/myProduct',
                 element: <MyProduct></MyProduct>
+            },
+            {
+                path: '/myOrders',
+                element: <MyOrders></MyOrders>
             },
             {
                 path: '/reportedItems',

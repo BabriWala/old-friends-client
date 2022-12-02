@@ -13,7 +13,7 @@ const Home = () => {
     const {data: advertisedProducts, isLoading, refetch} = useQuery({
         queryKey: ['All Buyers'],
         queryFn: async ()=>{
-            const res = await axios.get('http://localhost:5000/advertisedProducts');
+            const res = await axios.get('https://old-friends-server.vercel.app/advertisedProducts');
             return res.data;
         }
     })

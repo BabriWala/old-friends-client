@@ -25,7 +25,7 @@ const Modal = (props) => {
             productName,
             productResalePrice: resalePrice
         }
-        axios.post('http://localhost:5000/bookedProducts',bookedProduct)
+        axios.post('https://old-friends-server.vercel.app/bookedProducts',bookedProduct)
         .then(res => {
             if(res.data.acknowledged){
                 toast.success('Product Successfully Booked')

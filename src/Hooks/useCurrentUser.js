@@ -6,7 +6,7 @@ const useCurrentUser = (email) => {
     
         useEffect(()=>{
             if(email){
-            axios.get(`http://localhost:5000/users?email=${email}`)
+            axios.get(`https://old-friends-server.vercel.app/users?email=${email}`)
             .then(res => {
                 // if(res.data.status === 'Verified')
                 setCurrentUser(res.data)

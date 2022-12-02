@@ -52,7 +52,7 @@ const SignUp = () => {
               }
 
 
-              axios.post('http://localhost:5000/users', signUpUser)
+              axios.post('https://old-friends-server.vercel.app/users', signUpUser)
               .then(res => console.log(res))
             })
             })
@@ -75,7 +75,7 @@ const SignUp = () => {
           url: user.photoURL,
           status: 'Not Verified'
         }
-        axios.post('http://localhost:5000/users', signUpUser)
+        axios.post('https://old-friends-server.vercel.app/users', signUpUser)
         .then(res => console.log(res))
     })
   }

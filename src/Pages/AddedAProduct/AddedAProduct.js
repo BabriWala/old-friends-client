@@ -67,7 +67,7 @@ const AddedAProduct = () => {
       }
       console.log(product)
 
-      axios.post(`http://localhost:5000/products`, product)
+      axios.post(`https://old-friends-server.vercel.app/products`, product)
       .then(res => {
         if(res.data.acknowledged){
           toast.success('Product Added SuccessFully')
