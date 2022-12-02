@@ -345,8 +345,8 @@ export default function Header() {
           <div
             className={
               show
-                ? "absolute xl:hidden w-full h-full transform -translate-x-0 z-40"
-                : "absolute xl:hidden w-full h-full transform -translate-x-full z-40"
+                ? "fixed xl:hidden w-full h-full transform -translate-x-0 z-40"
+                : " xl:hidden w-full h-full transform -translate-x-full z-40 fixed"
             }
             id="mobile-nav"
           >

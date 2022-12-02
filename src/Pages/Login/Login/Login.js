@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
 import { useForm } from "react-hook-form";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -11,6 +11,7 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const { logIn, googleSignIn } = useContext(AuthContext);
+  const navigate = useNavigate()
 
 
   const handleLogin = (data) => {
@@ -19,14 +20,14 @@ const Login = () => {
     const password = data.password;
     // console.log(email, password)
     logIn(email, password)
-    .then(() => {})
+    .then(() => {navigate('/')})
     .catch(err => console.error(err))
     // signInWithEmailAndPassword(email, password)
   };
 
   const handleGoogleLogin = () =>{
     googleSignIn()
-    .then(()=>{})
+    .then(()=>{navigate('/')})
     .catch(err => console.error(err))
   }
 

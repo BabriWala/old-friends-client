@@ -19,6 +19,7 @@ const SingleProduct = (props) => {
     sellerName,
     usingTime,
   } = props.product;
+  const setSelectedItem = props.setSelectedItem;
   // console.log(datePosted,
   //   location,
   //   originalPrice,
@@ -58,9 +59,9 @@ const SingleProduct = (props) => {
       <h2 className="text-base font-semibold flex items-center leading-5 mt-5 text-gray-800">
         Seller Name:<span className="mr-5">{sellerName}</span> {(sellerStatus === "Verified") && <AiFillCheckCircle />}
       </h2>
-      <button  className=" w-full my-2 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white py-2 text-xs mt-5">
-        Book Now
-      </button>
+      <label 
+      onClick={()=>setSelectedItem(props.product)} 
+      htmlFor="friendsModal" className=" w-full my-2 block text-center bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white py-2 text-xs mt-5">Book Now</label>
     </div>
   );
 };
