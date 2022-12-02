@@ -111,15 +111,14 @@ export default function Header() {
                         </ul>
                       )}
 
-                      {
-                        user?.email &&
+                      {user?.email && (
                         <span
-                        to={"/dashboard"}
-                        className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out"
-                      >
-                        Dashboard
-                      </span>
-                      }
+                          to={"/dashboard"}
+                          className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out"
+                        >
+                          Dashboard
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -134,11 +133,12 @@ export default function Header() {
                   >
                     {profile && (
                       <ul className="p-2 w-40 border-r bg-white absolute rounded left-0 shadow mt-16 top-0 ">
-                        <li onClick={handleLogOut} className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                        <li
+                          onClick={handleLogOut}
+                          className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none"
+                        >
                           <div className="flex items-center">
-                            <span  className="ml-2">
-                              Log Out
-                            </span>
+                            <span className="ml-2">Log Out</span>
                           </div>
                         </li>
                       </ul>
@@ -394,7 +394,7 @@ export default function Header() {
                       </div>
                     </div>
                     <ul className="f-m-m">
-                      <Link to={"/home"} className="cursor-pointer">
+                      <Link to={"/"} className="cursor-pointer">
                         <li className="text-gray-800 pt-8">
                           <div className="flex items-center">
                             <p className="text-indigo-700 xl:text-base text-base ml-3">
@@ -414,105 +414,132 @@ export default function Header() {
                           </div>
                         </li>
                       </Link>
-                      <Link to={"/dashboard"} className="cursor-pointer">
-                        <li className="text-gray-800 pt-8">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                              <p className="text-gray-800 xl:text-base md:text-2xl text-base ml-3">
-                                Dashboard
-                              </p>
+                      {currentUser?.role === "admin" && (
+                        <>
+                          <Link to={"/allBuyers"} className="cursor-pointer">
+                            <li className="text-gray-800 pt-8">
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center">
+                                  <p className="text-gray-800 xl:text-base md:text-2xl text-base ml-3">
+                                    All Buyers
+                                  </p>
+                                </div>
+                              </div>
+                            </li>
+                          </Link>
+                          <Link to={"/allSellers"} className="cursor-pointer">
+                            <li className="text-gray-800 pt-8">
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center">
+                                  <p className="text-gray-800 xl:text-base md:text-2xl text-base ml-3">
+                                    All Sellers
+                                  </p>
+                                </div>
+                              </div>
+                            </li>
+                          </Link>
+                          <Link
+                            to={"/reportedItems"}
+                            className="cursor-pointer"
+                          >
+                            <li className="text-gray-800 pt-8">
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center">
+                                  <p className="text-gray-800 xl:text-base md:text-2xl text-base ml-3">
+                                    Reported Items
+                                  </p>
+                                </div>
+                              </div>
+                            </li>
+                          </Link>
+                        </>
+                      )}
+                      {currentUser?.role === "buyer" && (
+                        <Link to={"/myOrders"} className="cursor-pointer">
+                          <li className="text-gray-800 pt-8">
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center">
+                                <p className="text-gray-800 xl:text-base md:text-2xl text-base ml-3">
+                                  My Orders
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </li>
-                      </Link>
-                      <Link to={"/allBuyers"} className="cursor-pointer">
-                        <li className="text-gray-800 pt-8">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                              <p className="text-gray-800 xl:text-base md:text-2xl text-base ml-3">
-                                All Buyers
-                              </p>
-                            </div>
-                          </div>
-                        </li>
-                      </Link>
-                      <Link to={"/allSellers"} className="cursor-pointer">
-                        <li className="text-gray-800 pt-8">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                              <p className="text-gray-800 xl:text-base md:text-2xl text-base ml-3">
-                                All Sellers
-                              </p>
-                            </div>
-                          </div>
-                        </li>
-                      </Link>
-                      <Link to={"/reportedItems"} className="cursor-pointer">
-                        <li className="text-gray-800 pt-8">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                              <p className="text-gray-800 xl:text-base md:text-2xl text-base ml-3">
-                                Reported Items
-                              </p>
-                            </div>
-                          </div>
-                        </li>
-                      </Link>
-                      <Link to={"/addAProduct"} className="cursor-pointer">
-                        <li className="text-gray-800 pt-8">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                              <p className="text-gray-800 xl:text-base md:text-2xl text-base ml-3">
-                                Add a Product
-                              </p>
-                            </div>
-                          </div>
-                        </li>
-                      </Link>
-                      <Link to={"/myBuyers"} className="cursor-pointer">
-                        <li className="text-gray-800 pt-8">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                              <p className="text-gray-800 xl:text-base md:text-2xl text-base ml-3">
-                                My Buyers
-                              </p>
-                            </div>
-                          </div>
-                        </li>
-                      </Link>
-                      <Link to={"/myOrders"} className="cursor-pointer">
-                        <li className="text-gray-800 pt-8">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                              <p className="text-gray-800 xl:text-base md:text-2xl text-base ml-3">
-                                My Orders
-                              </p>
-                            </div>
-                          </div>
-                        </li>
-                      </Link>
+                          </li>
+                        </Link>
+                      )}
+                      {currentUser?.role === "seller" && (
+                        <>
+                          <Link to={"/addAProduct"} className="cursor-pointer">
+                            <li className="text-gray-800 pt-8">
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center">
+                                  <p className="text-gray-800 xl:text-base md:text-2xl text-base ml-3">
+                                    Add A Product
+                                  </p>
+                                </div>
+                              </div>
+                            </li>
+                          </Link>
+                          <Link to={"/myProduct"} className="cursor-pointer">
+                            <li className="text-gray-800 pt-8">
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center">
+                                  <p className="text-gray-800 xl:text-base md:text-2xl text-base ml-3">
+                                    My Product
+                                  </p>
+                                </div>
+                              </div>
+                            </li>
+                          </Link>
+                          <Link to={"/myBuyers"} className="cursor-pointer">
+                            <li className="text-gray-800 pt-8">
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center">
+                                  <p className="text-gray-800 xl:text-base md:text-2xl text-base ml-3">
+                                    My Buyers
+                                  </p>
+                                </div>
+                              </div>
+                            </li>
+                          </Link>
+                        </>
+                      )}
                     </ul>
                   </div>
                   <div className="w-full pt-4">
                     <div className="border-t border-gray-300">
-                      <div className="w-full flex items-center justify-between pt-1">
-                        <div className="flex items-center">
-                          <img
-                            alt="profile-pic"
-                            src="https://tuk-cdn.s3.amazonaws.com/assets/components/boxed_layout/bl_1.png"
-                            className="w-8 h-8 rounded-md"
-                          />
-                          <p className=" text-gray-800 text-base leading-4 ml-2">
-                            Jane Doe
-                          </p>
-                        </div>
-                        <ul className="">
-                          <li className="cursor-pointer text-gray-800 pt-5 pb-3 pl-3">
-                            <div className=" h-6  md:h-8">
-                              <h3>Log Out</h3>
+                      <div className="w-full mt-1 items-center justify-between pt-1">
+                        {user?.uid ? (
+                          <>
+                            <div className="flex items-center">
+                              <img
+                                alt="profile-pic"
+                                src={user.photoURL}
+                                className="w-8 h-8 rounded-md"
+                              />
+                              <p className=" text-gray-800 text-base leading-4 ml-2">
+                                {user.displayName}
+                              </p>
                             </div>
-                          </li>
-                        </ul>
+                            <ul onClick={handleLogOut} className="text-center">
+                              <li className="cursor-pointer text-gray-800 pt-2 pb-3">
+                                <div className=" h-6  md:h-8">
+                                  <h3>Log Out</h3>
+                                </div>
+                              </li>
+                            </ul>
+                          </>
+                        ) : (
+                          <Link to={"/login"}>
+                            <ul className="">
+                              <li className="cursor-pointer text-gray-800 pt-5 pb-3 pl-3">
+                                <div className=" h-6  md:h-8">
+                                  <h3>Log In</h3>
+                                </div>
+                              </li>
+                            </ul>
+                          </Link>
+                        )}
                       </div>
                     </div>
                   </div>

@@ -17,7 +17,7 @@ const CategoryProducts = () => {
 
   return (
     <div>
-      <div className="py-24 flex-col items-center justify-center  px-4">
+      <div className="py-24 flex-col items-center justify-center mt-10 md:0  px-4">
         <h1 className="text-center xl:text-5xl md:text-4xl text-2xl font-bold text-gray-800">
           All Collection Of {products[0].category.toUpperCase()}
         </h1>

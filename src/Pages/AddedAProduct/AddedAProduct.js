@@ -91,7 +91,7 @@ const AddedAProduct = () => {
 
   return (
     <div>
-      <div className="h-full  w-full pb-16 px-4">
+      <div className="h-full  w-full pb-16 px-4 mt-20 md:mt-0">
         <div className="flex flex-col items-center justify-center">
           <div className="bg-white shadow-lg border rounded lg:w-1/3  md:w-1/2 w-full p-10 mt-16">
             <p

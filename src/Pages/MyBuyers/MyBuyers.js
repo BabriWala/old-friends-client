@@ -2,7 +2,7 @@ import React from 'react';
 
 const MyBuyers = () => {
     return (
-        <div>
+        <div className='mt-20'>
             <h2>My Buyers</h2>
         </div>
     );
