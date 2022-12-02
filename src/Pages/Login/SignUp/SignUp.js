@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../Context/AuthProvider";
 import axios from "axios";
+import {toast} from 'react-hot-toast';
 // import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 // import app from "../../../Firebase/firebase.config";
 
 const SignUp = () => {
   const { signUp, profileUpdate,googleSignIn } = useContext(AuthContext);
   // const [imageURL, setImageURL] = useState("");
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -53,7 +55,11 @@ const SignUp = () => {
 
 
               axios.post('https://old-friends-server.vercel.app/users', signUpUser)
-              .then(res => console.log(res))
+              .then(res => {
+                // console.log(res)
+                toast.success('Successfully Sign Up')
+                navigate('/')
+              })
             })
             })
         .catch(err => console.error(err, 'problem'))
@@ -76,7 +82,10 @@ const SignUp = () => {
           status: 'Not Verified'
         }
         axios.post('https://old-friends-server.vercel.app/users', signUpUser)
-        .then(res => console.log(res))
+      .then(res => {
+        // console.log(res)
+        navigate('/')
+      })
     })
   }
 

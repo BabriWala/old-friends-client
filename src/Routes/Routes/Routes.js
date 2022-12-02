@@ -14,6 +14,10 @@ import CategoryProducts from "../../Pages/CategoryProducts/CategoryProducts";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import MyProduct from "../../Pages/MyProduct/MyProduct";
 import MyOrders from "../../Pages/MyOrders/MyOrders";
+import MyBuyers from "../../Pages/MyBuyers/MyBuyers";
+import AdminRoute from "./PrivateRoute/AdminRoute";
+import SellerRoute from "./PrivateRoute/SellerRoute";
+import BuyerRoute from "./PrivateRoute/BuyerRoute";
 
 
 export const router = createBrowserRouter([
@@ -40,15 +44,15 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/addAProduct',
-                element: <AddedAProduct></AddedAProduct>
+                element: <SellerRoute><AddedAProduct></AddedAProduct></SellerRoute>
             },
             {
                 path: '/allSellers',
-                element: <AllSellers></AllSellers>
+                element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
             },
             {
                 path: '/allBuyers',
-                element: <AllBuyers></AllBuyers>
+                element: <PrivateRoute><AllBuyers></AllBuyers></PrivateRoute>
             },
             {
                 path: '/category/:name',
@@ -57,15 +61,19 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/myProduct',
-                element: <MyProduct></MyProduct>
+                element: <SellerRoute><MyProduct></MyProduct></SellerRoute>
             },
             {
                 path: '/myOrders',
-                element: <MyOrders></MyOrders>
+                element: <BuyerRoute><MyOrders></MyOrders></BuyerRoute>
             },
             {
                 path: '/reportedItems',
                 element: <ReportedItems></ReportedItems>
+            },
+            {
+                path: '/myBuyers',
+                element: <SellerRoute><MyBuyers></MyBuyers></SellerRoute>
             }
         ]
         

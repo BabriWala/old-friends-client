@@ -111,12 +111,15 @@ export default function Header() {
                         </ul>
                       )}
 
-                      <span
+                      {
+                        user?.email &&
+                        <span
                         to={"/dashboard"}
                         className="cursor-pointer h-full flex items-center text-sm hover:text-indigo-700 text-gray-800 mr-10 tracking-normal transition duration-150 ease-in-out"
                       >
                         Dashboard
                       </span>
+                      }
                     </div>
                   </div>
                 </div>
@@ -131,9 +134,9 @@ export default function Header() {
                   >
                     {profile && (
                       <ul className="p-2 w-40 border-r bg-white absolute rounded left-0 shadow mt-16 top-0 ">
-                        <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                        <li onClick={handleLogOut} className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                           <div className="flex items-center">
-                            <span onClick={handleLogOut} className="ml-2">
+                            <span  className="ml-2">
                               Log Out
                             </span>
                           </div>
@@ -142,11 +145,11 @@ export default function Header() {
                     )}
                     <img
                       className="rounded h-10 w-10 object-cover"
-                      src={user.photoURL}
+                      src={user?.photoURL}
                       alt="logo"
                     />
                     <p className="text-gray-800 text-sm ml-2">
-                      {user.displayName}
+                      {user?.displayName}
                     </p>
                   </div>
                 </div>
