@@ -36,6 +36,7 @@ const AddedAProduct = () => {
     const productName = data.productName;
     const resalePrice = data.resalePrice;
     const usingTime = data.usingTime;
+    const purchaseDate = data.purchaseDate;
     
     
     const formData = new FormData();
@@ -63,7 +64,8 @@ const AddedAProduct = () => {
         sellerEmail: currentUser.email,
         sellerStatus: currentUser.status,
         role: currentUser.role,
-        saleStatus: "available"
+        saleStatus: "available",
+        purchaseDate
       }
       console.log(product)
 
@@ -191,6 +193,17 @@ const AddedAProduct = () => {
                   type="location"
                   className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
                   {...register("mobileNumber", { required: true })}
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium leading-none text-gray-800">
+                  Year of Purchase
+                </label>
+                <input
+                  aria-label="Year of Purchase"
+                  type="location"
+                  className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2"
+                  {...register("purchaseDate", { required: true })}
                 />
               </div>
               <div>
